@@ -102,16 +102,16 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
     ,sum(carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions
     GROUP BY year
-    ORDER BY year desc
+    ORDER BY year asc
     ;
 
 
-| year | total_carbon_fp | 
-| ---: | --------------: | 
-| 2017 | 340271          | 
-| 2016 | 1640182         | 
-| 2015 | 10840415        | 
-| 2014 | 624226          | 
-| 2013 | 503857          | 
+| year | total_carbon_fp |                         ![image](https://github.com/user-attachments/assets/ab9e9bc9-3f8f-4af2-a48d-f893862b1a63)
 
+| ---: | --------------: | 
+| 2013 | 503857          | 
+| 2014 | 624226          | 
+| 2015 | 10840415        | 
+| 2016 | 1640182         | 
+| 2017 | 340271          |
 ## Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
