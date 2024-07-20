@@ -8,18 +8,14 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
     order by total_carbon_fp desc
     LIMIT 5
 
-product_name
-total_carbon_fp
-Wind Turbine G128 5 Megawats
-3718044
-Wind Turbine G132 5 Megawats
-3276187
-Wind Turbine G114 2 Megawats
-1532608
-Wind Turbine G90 2 Megawats
-1251625
-TCDE
-198150
+| product_name                 | total_carbon_fp | 
+| ---------------------------: | --------------: | 
+| Wind Turbine G128 5 Megawats | 3718044         | 
+| Wind Turbine G132 5 Megawats | 3276187         | 
+| Wind Turbine G114 2 Megawats | 1532608         | 
+| Wind Turbine G90 2 Megawats  | 1251625         | 
+| TCDE                         | 198150          | 
+
 
     
 
