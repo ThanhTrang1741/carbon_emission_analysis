@@ -62,7 +62,7 @@ country_name: The name of the country.
 
 **Wind Turbine is the products contribute the most to carbon emissions?**
     
-## What are the industry groups of these products?
+## 2. What are the industry groups of these products?
     SELECT 
     p.product_name
     ,ind.industry_group
@@ -85,7 +85,7 @@ country_name: The name of the country.
 
 **Electrical Equipment and Machinery is the industry groups of these products?**
 
-## What are the industries with the highest contribution to carbon emissions?
+## 3. What are the industries with the highest contribution to carbon emissions?
     SELECT 
     p.product_name
     ,ind.industry_group
@@ -133,7 +133,7 @@ country_name: The name of the country.
 | ACTI9 IID K 2P 40A 30MA AC-TYPE RESIDUAL CURRENT CIRCUIT BREAKER              | Electrical Equipment and Machinery | 19              | 
 | Cable                                                                         | Electrical Equipment and Machinery | 0               | 
 
-## What are the companies with the highest contribution to carbon emissions?
+## 4. What are the companies with the highest contribution to carbon emissions?
 
     SELECT 
     p.product_name
@@ -152,7 +152,8 @@ country_name: The name of the country.
 | Wind Turbine G128 5 Megawats | "Gamesa Corporación Tecnológica, S.A." | 3718044         | 
 
 ***Gamesa Corporación Tecnológica, S.A. is the companies with the highest contribution to carbon emissions***
-## What are the countries with the highest contribution to carbon emissions?
+
+## 5. What are the countries with the highest contribution to carbon emissions?
 
     SELECT 
     country.country_name
@@ -175,7 +176,7 @@ country_name: The name of the country.
 
 *** Spain, Germany, Japan... are the countries with the highest contribution to carbon emissions***
 
-## What is the trend of carbon footprints (PCFs) over the years?
+## 6. What is the trend of carbon footprints (PCFs) over the years?
 
     SELECT
     year
@@ -196,7 +197,7 @@ country_name: The name of the country.
 
 ![image](https://github.com/user-attachments/assets/de08e780-941f-4725-8aa8-8e7b4603d8be)
 
-## Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
+## 7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 
     SELECT
     ind.industry_group
