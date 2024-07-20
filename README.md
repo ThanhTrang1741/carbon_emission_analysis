@@ -60,7 +60,7 @@ country_name: The name of the country.
 | Wind Turbine G90 2 Megawats  | 1251625         | 
 | TCDE                         | 198150          | 
 
-**Wind Turbine is the products contribute the most to carbon emissions?**
+  **--> Wind Turbine is the products contribute the most to carbon emissions?**
     
 ## 2. What are the industry groups of these products?
     SELECT 
@@ -84,7 +84,7 @@ country_name: The name of the country.
 | Wind Turbine G90 2 Megawats  | Electrical Equipment and Machinery | 1251625         | 
 | TCDE                         | Materials                          | 198150          | 
 
-**Electrical Equipment and Machinery is the industry groups of these products?**
+  **--> Electrical Equipment and Machinery is the industry groups of these products?**
 
 ## 3. What are the industries with the highest contribution to carbon emissions?
     SELECT 
@@ -104,7 +104,8 @@ country_name: The name of the country.
 | ---------------------------: | ---------------------------------: | --------------: | 
 | Wind Turbine G128 5 Megawats | Electrical Equipment and Machinery | 3718044         | 
 
-**Electrical Equipment and Machinery is he industries with the highest contribution to carbon emissions?**
+  **--> Electrical Equipment and Machinery is he industries with the highest contribution to carbon emissions?**
+  
 ***In which: In the industry group of Electrical Equipment and Machinery, the product related to Wind Turbine is the main cause of carbon emissions***
 
     SELECT 
@@ -152,7 +153,7 @@ country_name: The name of the country.
 | ---------------------------: | -------------------------------------: | --------------: | 
 | Wind Turbine G128 5 Megawats | "Gamesa Corporación Tecnológica, S.A." | 3718044         | 
 
-***Gamesa Corporación Tecnológica, S.A. is the companies with the highest contribution to carbon emissions***
+  **--> Gamesa Corporación Tecnológica, S.A. is the companies with the highest contribution to carbon emissions**
 
 ## 5. What are the countries with the highest contribution to carbon emissions?
 
@@ -175,7 +176,7 @@ country_name: The name of the country.
 | USA          | 518381          | 
 | South Korea  | 186965          | 
 
-*** Spain, Germany, Japan... are the countries with the highest contribution to carbon emissions***
+  **--> Spain, Germany, Japan... are the countries with the highest contribution to carbon emissions**
 
 ## 6. What is the trend of carbon footprints (PCFs) over the years?
 
