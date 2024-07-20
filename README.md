@@ -60,7 +60,7 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
 | ---------------------------: | ---------------------------------: | --------------: | 
 | Wind Turbine G128 5 Megawats | Electrical Equipment and Machinery | 3718044         | 
 
-## In which: In the industry group of Electrical Equipment and Machinery, the product related to Wind Turbine is the main cause of carbon emissions
+***In which: In the industry group of Electrical Equipment and Machinery, the product related to Wind Turbine is the main cause of carbon emissions***
 
     SELECT 
     p.product_name
