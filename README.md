@@ -160,7 +160,8 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
     ORDER BY ind.industry_group, p.year
     ;
 
-    | industry_group                                                         | year | total_carbon_fp | 
+
+| industry_group                                                         | year | total_carbon_fp | 
 | ---------------------------------------------------------------------: | ---: | --------------: | 
 | "Consumer Durables, Household and Personal Products"                   | 2015 | 931             | 
 | "Food, Beverage & Tobacco"                                             | 2013 | 4995            | 
