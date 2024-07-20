@@ -7,7 +7,7 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
     ,sum(carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions
     GROUP BY product_name
-    order by total_carbon_fp desc
+    ORDER BY total_carbon_fp desc
     LIMIT 5
 
 | product_name                 | total_carbon_fp | 
@@ -30,7 +30,7 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
     LEFT JOIN industry_groups as ind
     ON p.industry_group_id = ind.id
     GROUP BY p.product_name,ind.industry_group
-    order by total_carbon_fp desc
+    ORDER BY total_carbon_fp desc
     LIMIT 5;
 
 
@@ -51,13 +51,43 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
     LEFT JOIN industry_groups as ind
     ON p.industry_group_id = ind.id
     GROUP BY p.product_name,ind.industry_group
-    order by total_carbon_fp desc
-    LIMIT 1;
+    ORDER BY total_carbon_fp desc
+    LIMIT 1
+    ;
 
 
 | product_name                 | industry_group                     | total_carbon_fp | 
 | ---------------------------: | ---------------------------------: | --------------: | 
 | Wind Turbine G128 5 Megawats | Electrical Equipment and Machinery | 3718044         | 
+
+## In which: In the industry group of Electrical Equipment and Machinery, the product related to Wind Turbine is the main cause of carbon emissions
+
+    SELECT 
+    p.product_name
+    ,ind.industry_group
+    ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+    FROM product_emissions as p
+    LEFT JOIN industry_groups as ind
+    ON p.industry_group_id = ind.id
+    WHERE ind.industry_group ='Electrical Equipment and Machinery'
+    GROUP BY p.product_name,ind.industry_group
+    ORDER BY total_carbon_fp desc
+    ;
+
+
+| product_name                                                                  | industry_group                     | total_carbon_fp | 
+| ----------------------------------------------------------------------------: | ---------------------------------: | --------------: | 
+| Wind Turbine G128 5 Megawats                                                  | Electrical Equipment and Machinery | 3718044         | 
+| Wind Turbine G132 5 Megawats                                                  | Electrical Equipment and Machinery | 3276187         | 
+| Wind Turbine G114 2 Megawats                                                  | Electrical Equipment and Machinery | 1532608         | 
+| Wind Turbine G90 2 Megawats                                                   | Electrical Equipment and Machinery | 1251625         | 
+| Electric Motor                                                                | Electrical Equipment and Machinery | 20008           | 
+| Vending Machine                                                               | Electrical Equipment and Machinery | 2268            | 
+| T300                                                                          | Electrical Equipment and Machinery | 655             | 
+| DC988 Type 11 Cordless Power Drill equipment with rechargeable NiCd batteries | Electrical Equipment and Machinery | 88              | 
+| D21710 Type 5 Corded Power Drill                                              | Electrical Equipment and Machinery | 56              | 
+| ACTI9 IID K 2P 40A 30MA AC-TYPE RESIDUAL CURRENT CIRCUIT BREAKER              | Electrical Equipment and Machinery | 19              | 
+| Cable                                                                         | Electrical Equipment and Machinery | 0               | 
 
 ## What are the companies with the highest contribution to carbon emissions? **** Gamesa Corporación Tecnológica, S.A.
 
