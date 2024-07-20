@@ -1,8 +1,9 @@
 # carbon_emission_analysis
 This report aims to analyze carbon emissions to examine the carbon footprint across various industries
 
-## Which products contribute the most to carbon emissions
-    SELECT product_name
+## Which products contribute the most to carbon emissions? **** Wind Turbine G128 5 Megawats
+    SELECT 
+    product_name
     ,sum(carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions
     GROUP BY product_name
@@ -20,8 +21,9 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
 
     
 
-## What are the industry groups of these products?
-    SELECT p.product_name
+## What are the industry groups of these products? **** Electrical Equipment and Machinery
+    SELECT 
+    p.product_name
     ,ind.industry_group
     ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
@@ -40,12 +42,27 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
 | Wind Turbine G90 2 Megawats  | Electrical Equipment and Machinery | 1251625         | 
 | TCDE                         | Materials                          | 198150          | 
 
-## What are the industries with the highest contribution to carbon emissions?
+## What are the industries with the highest contribution to carbon emissions? **** Electrical Equipment and Machinery
+    SELECT 
+    p.product_name
+    ,ind.industry_group
+    ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+    FROM product_emissions as p
+    LEFT JOIN industry_groups as ind
+    ON p.industry_group_id = ind.id
+    GROUP BY p.product_name,ind.industry_group
+    order by total_carbon_fp desc
+    LIMIT 1;
 
+
+| product_name                 | industry_group                     | total_carbon_fp | 
+| ---------------------------: | ---------------------------------: | --------------: | 
+| Wind Turbine G128 5 Megawats | Electrical Equipment and Machinery | 3718044         | 
 
 ## What are the companies with the highest contribution to carbon emissions? **** Gamesa Corporación Tecnológica, S.A.
 
-    SELECT p.product_name
+    SELECT 
+    p.product_name
     ,com.company_name
     ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
@@ -62,7 +79,8 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
 
 ## What are the countries with the highest contribution to carbon emissions? **** Spain  
 
-    SELECT p.product_name
+    SELECT 
+    p.product_name
     ,country.country_name
     ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
@@ -79,5 +97,21 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
 
 ## What is the trend of carbon footprints (PCFs) over the years?
 
+    SELECT
+    year
+    ,sum(carbon_footprint_pcf) as total_carbon_fp
+    FROM product_emissions
+    GROUP BY year
+    ORDER BY year desc
+    ;
+
+
+| year | total_carbon_fp | 
+| ---: | --------------: | 
+| 2017 | 340271          | 
+| 2016 | 1640182         | 
+| 2015 | 10840415        | 
+| 2014 | 624226          | 
+| 2013 | 503857          | 
 
 ## Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
