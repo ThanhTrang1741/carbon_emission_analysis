@@ -64,15 +64,16 @@ country_name: The name of the country.
     
 ## 2. What are the industry groups of these products?
     SELECT 
-    p.product_name
-    ,ind.industry_group
-    ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+          p.product_name
+          ,ind.industry_group
+          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
     LEFT JOIN industry_groups as ind
     ON p.industry_group_id = ind.id
-    GROUP BY p.product_name,ind.industry_group
+    GROUP BY p.product_name, ind.industry_group
     ORDER BY total_carbon_fp desc
-    LIMIT 5;
+    LIMIT 5
+    ;
 
 
 | product_name                 | industry_group                     | total_carbon_fp | 
@@ -87,9 +88,9 @@ country_name: The name of the country.
 
 ## 3. What are the industries with the highest contribution to carbon emissions?
     SELECT 
-    p.product_name
-    ,ind.industry_group
-    ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+          p.product_name
+          ,ind.industry_group
+          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
     LEFT JOIN industry_groups as ind
     ON p.industry_group_id = ind.id
@@ -107,9 +108,9 @@ country_name: The name of the country.
 ***In which: In the industry group of Electrical Equipment and Machinery, the product related to Wind Turbine is the main cause of carbon emissions***
 
     SELECT 
-    p.product_name
-    ,ind.industry_group
-    ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+          p.product_name
+          ,ind.industry_group
+          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
     LEFT JOIN industry_groups as ind
     ON p.industry_group_id = ind.id
@@ -136,14 +137,14 @@ country_name: The name of the country.
 ## 4. What are the companies with the highest contribution to carbon emissions?
 
     SELECT 
-    p.product_name
-    ,com.company_name
-    ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+          p.product_name
+          ,com.company_name
+          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
     LEFT JOIN companies as com
     ON p.company_id = com.id
     GROUP BY p.product_name,com.company_name
-    order by total_carbon_fp desc
+    ORDER BY total_carbon_fp desc
     LIMIT 1;
 
 
@@ -156,13 +157,13 @@ country_name: The name of the country.
 ## 5. What are the countries with the highest contribution to carbon emissions?
 
     SELECT 
-    country.country_name
-    ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+          country.country_name
+          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
     LEFT JOIN countries as country
     ON p.country_id = country.id
     GROUP BY country.country_name
-    order by total_carbon_fp desc
+    ORDER BY total_carbon_fp desc
     LIMIT 5
     ;
 
@@ -179,8 +180,8 @@ country_name: The name of the country.
 ## 6. What is the trend of carbon footprints (PCFs) over the years?
 
     SELECT
-    year
-    ,sum(carbon_footprint_pcf) as total_carbon_fp
+          year
+          ,sum(carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions
     GROUP BY year
     ORDER BY year asc
@@ -200,9 +201,9 @@ country_name: The name of the country.
 ## 7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 
     SELECT
-    ind.industry_group
-    ,p.year
-    ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+          ind.industry_group
+          ,p.year
+          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
     FROM product_emissions as p
     LEFT JOIN industry_groups as ind
     ON p.industry_group_id = ind.id
