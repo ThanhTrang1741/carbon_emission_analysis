@@ -200,7 +200,10 @@ country_name: The name of the country.
 | 2016 | 1640182         | 
 | 2017 | 340271          |
 
-![image](https://github.com/user-attachments/assets/de08e780-941f-4725-8aa8-8e7b4603d8be)
+![image](https://github.com/user-attachments/assets/844ed99d-2167-4ca4-bbc1-668f5381b9ab)
+
+
+**The total_carbon_fp seem to vary significantly from year to year, with a notable increase in 2015 - 10840415 pcf compared to the other years**
 
 ## 7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 
@@ -309,87 +312,4 @@ country_name: The name of the country.
 **Then selects all industry_group from the "base" table where the industry group is in a subquery that filters industry groups based on the count of trends labeled as "decrease". Thanks to that identify industry groups where the trend in carbon footprint is predominantly decreasing**
 
     WITH base as
-    (
- 	SELECT 
-    		a.*, 
-    	CASE 
-        	WHEN a.total_carbon_fp - a.carbon_fp_change > 0 THEN 'increase'
-   		WHEN a.total_carbon_fp - a.carbon_fp_change < 0 THEN 'decrease'
-        	ELSE 'stable' 
-    	END AS trend   
-	FROM
-  		(SELECT 
-        		ind.industry_group
-        		,p.year
-        		,SUM(p.carbon_footprint_pcf) as total_carbon_fp
-        		,LAG(SUM(p.carbon_footprint_pcf)) OVER (PARTITION BY ind.industry_group ORDER BY p.year) AS carbon_fp_change
-    		FROM 
-        		product_emissions as p
-    		LEFT JOIN 
-       	 		industry_groups as ind ON p.industry_group_id = ind.id
-    		GROUP BY 
-        		ind.industry_group, p.year
-   		ORDER BY 
-        		ind.industry_group, p.year
-   		) a
-    )
-
-    SELECT * 
-    FROM
-	base 
-    WHERE 
-	industry_group 
-    IN
-	(
-	SELECT b.industry_group
-	FROM
-		(
-		SELECT 
-		  	de.industry_group
-		  	,tl.count_trend
-
-		FROM
- 			(
-			SELECT 
-			 	industry_group
-			 	,trend
-			FROM base 
-			WHERE trend ='decrease'
-			GROUP BY industry_group,trend) de
-
-		LEFT JOIN
-
-			(
-			SELECT 
-			  	a.industry_group
-			  	,count(a.industry_group) as count_trend
-			FROM
-  				(
-				 SELECT
-				 	industry_group
-				 	,trend
-				FROM base 
-				GROUP BY industry_group,trend) a
-			GROUP BY a.industry_group) tl
-		ON de.industry_group = tl.industry_group
-	HAVING count_trend <3) b
-	)
-
-| industry_group                           | year | total_carbon_fp | carbon_fp_change | trend    | 
-| ---------------------------------------: | ---: | --------------: | ---------------: | -------: | 
-| Food & Staples Retailing                 | 2014 | 773             | [NULL]           | stable   | 
-| Food & Staples Retailing                 | 2015 | 706             | 773              | decrease | 
-| Food & Staples Retailing                 | 2016 | 2               | 706              | decrease | 
-| Media                                    | 2013 | 9645            | [NULL]           | stable   | 
-| Media                                    | 2014 | 9645            | 9645             | stable   | 
-| Media                                    | 2015 | 1919            | 9645             | decrease | 
-| Media                                    | 2016 | 1808            | 1919             | decrease | 
-| Retailing                                | 2014 | 19              | [NULL]           | stable   | 
-| Retailing                                | 2015 | 11              | 19               | decrease | 
-| Semiconductors & Semiconductor Equipment | 2014 | 50              | [NULL]           | stable   | 
-| Semiconductors & Semiconductor Equipment | 2016 | 4               | 50               | decrease | 
-
-
-![image](https://github.com/user-attachments/assets/00d993f7-768a-4ce0-8f06-3a92dacf1f47)   ![image](https://github.com/user-attachments/assets/90fc8779-9201-42a4-928a-70039d60131e)  ![image](https://github.com/user-attachments/assets/7ab33bf9-ab5e-443a-98bd-fb32332f9cf3)
-
-
+   IT, YOU CAN SHARE THE RESULT HERE =]]]**
