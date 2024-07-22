@@ -70,7 +70,7 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 | Wind Turbine G90 2 Megawats  | 1251625         | 
 | TCDE                         | 198150          | 
 
-  **--> Wind Turbine is the products contribute the most to carbon emissions?**
+  **--> Wind Turbine is the products contribute the most to carbon emissions**
     
 ## 2. What are the industry groups of these products?
     SELECT 
