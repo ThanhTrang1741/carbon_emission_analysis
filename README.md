@@ -334,12 +334,12 @@ country_name: The name of the country.
    		) a
     )
 
-SELECT * 
-FROM
+    SELECT * 
+    FROM
 	base 
-WHERE 
+    WHERE 
 	industry_group 
-IN
+    IN
 	(
 	SELECT b.industry_group
 	FROM
