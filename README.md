@@ -183,9 +183,12 @@ country_name: The name of the country.
     SELECT
           year
           ,sum(carbon_footprint_pcf) as total_carbon_fp
-    FROM product_emissions
-    GROUP BY year
-    ORDER BY year asc
+    FROM 
+      product_emissions
+    GROUP BY 
+      year
+    ORDER BY 
+      year asc
     ;
 
 
@@ -201,86 +204,106 @@ country_name: The name of the country.
 
 ## 7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 
-    SELECT
-          ind.industry_group
-          ,p.year
-          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
-    FROM product_emissions as p
-    LEFT JOIN industry_groups as ind
-    ON p.industry_group_id = ind.id
-    GROUP BY ind.industry_group, p.year
-    ORDER BY ind.industry_group, p.year
-    ;
+
+**First of all, we have table named "base" that calculates the total carbon footprint per capita for each industry group in a given year and determines the trend (increase, decrease, or stable) based on the change in carbon footprint compared to the previous year**
+
+    SELECT 
+      a.*, 
+      CASE 
+        WHEN a.total_carbon_fp - a.carbon_fp_change > 0 THEN 'increase'
+   		   WHEN a.total_carbon_fp - a.carbon_fp_change < 0 THEN 'decrease'
+        ELSE 'stable' 
+      END AS trend   
+      FROM
+  		    (SELECT 
+        	 ind.industry_group
+        	 ,p.year
+          ,SUM(p.carbon_footprint_pcf) as total_carbon_fp,
+        	 LAG(SUM(p.carbon_footprint_pcf)) OVER (PARTITION BY ind.industry_group ORDER BY p.year) AS carbon_fp_change
+    	    FROM 
+        	 product_emissions as p
+        	LEFT JOIN 
+       	 	industry_groups as ind ON p.industry_group_id = ind.id
+    	    GROUP BY 
+        	 ind.industry_group, p.year
+   		    ORDER BY 
+        	 ind.industry_group, p.year
+ 
 
 
-| industry_group                                                         | year | total_carbon_fp | 
-| ---------------------------------------------------------------------: | ---: | --------------: | 
-| "Consumer Durables, Household and Personal Products"                   | 2015 | 931             | 
-| "Food, Beverage & Tobacco"                                             | 2013 | 4995            | 
-| "Food, Beverage & Tobacco"                                             | 2014 | 2685            | 
-| "Food, Beverage & Tobacco"                                             | 2015 | 0               | 
-| "Food, Beverage & Tobacco"                                             | 2016 | 100289          | 
-| "Food, Beverage & Tobacco"                                             | 2017 | 3162            | 
-| "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 2015 | 8909            | 
-| "Mining - Iron, Aluminum, Other Metals"                                | 2015 | 8181            | 
-| "Pharmaceuticals, Biotechnology & Life Sciences"                       | 2013 | 32271           | 
-| "Pharmaceuticals, Biotechnology & Life Sciences"                       | 2014 | 40215           | 
-| "Textiles, Apparel, Footwear and Luxury Goods"                         | 2015 | 387             | 
-| Automobiles & Components                                               | 2013 | 130189          | 
-| Automobiles & Components                                               | 2014 | 230015          | 
-| Automobiles & Components                                               | 2015 | 817227          | 
-| Automobiles & Components                                               | 2016 | 1404833         | 
-| Capital Goods                                                          | 2013 | 60190           | 
-| Capital Goods                                                          | 2014 | 93699           | 
-| Capital Goods                                                          | 2015 | 3505            | 
-| Capital Goods                                                          | 2016 | 6369            | 
-| Capital Goods                                                          | 2017 | 94949           | 
-| Chemicals                                                              | 2015 | 62369           | 
-| Commercial & Professional Services                                     | 2013 | 1157            | 
-| Commercial & Professional Services                                     | 2014 | 477             | 
-| Commercial & Professional Services                                     | 2016 | 2890            | 
-| Commercial & Professional Services                                     | 2017 | 741             | 
-| Consumer Durables & Apparel                                            | 2013 | 2867            | 
-| Consumer Durables & Apparel                                            | 2014 | 3280            | 
-| Consumer Durables & Apparel                                            | 2016 | 1162            | 
-| Containers & Packaging                                                 | 2015 | 2988            | 
-| Electrical Equipment and Machinery                                     | 2015 | 9801558         | 
-| Energy                                                                 | 2013 | 750             | 
-| Energy                                                                 | 2016 | 10024           | 
-| Food & Beverage Processing                                             | 2015 | 141             | 
-| Food & Staples Retailing                                               | 2014 | 773             | 
-| Food & Staples Retailing                                               | 2015 | 706             | 
-| Food & Staples Retailing                                               | 2016 | 2               | 
-| Gas Utilities                                                          | 2015 | 122             | 
-| Household & Personal Products                                          | 2013 | 0               | 
-| Materials                                                              | 2013 | 200513          | 
-| Materials                                                              | 2014 | 75678           | 
-| Materials                                                              | 2016 | 88267           | 
-| Materials                                                              | 2017 | 213137          | 
-| Media                                                                  | 2013 | 9645            | 
-| Media                                                                  | 2014 | 9645            | 
-| Media                                                                  | 2015 | 1919            | 
-| Media                                                                  | 2016 | 1808            | 
-| Retailing                                                              | 2014 | 19              | 
-| Retailing                                                              | 2015 | 11              | 
-| Semiconductors & Semiconductor Equipment                               | 2014 | 50              | 
-| Semiconductors & Semiconductor Equipment                               | 2016 | 4               | 
-| Semiconductors & Semiconductors Equipment                              | 2015 | 3               | 
-| Software & Services                                                    | 2013 | 6               | 
-| Software & Services                                                    | 2014 | 146             | 
-| Software & Services                                                    | 2015 | 22856           | 
-| Software & Services                                                    | 2016 | 22846           | 
-| Software & Services                                                    | 2017 | 690             | 
-| Technology Hardware & Equipment                                        | 2013 | 61100           | 
-| Technology Hardware & Equipment                                        | 2014 | 167361          | 
-| Technology Hardware & Equipment                                        | 2015 | 106157          | 
-| Technology Hardware & Equipment                                        | 2016 | 1566            | 
-| Technology Hardware & Equipment                                        | 2017 | 27592           | 
-| Telecommunication Services                                             | 2013 | 52              | 
-| Telecommunication Services                                             | 2014 | 183             | 
-| Telecommunication Services                                             | 2015 | 183             | 
-| Tires                                                                  | 2015 | 2022            | 
-| Tobacco                                                                | 2015 | 1               | 
-| Trading Companies & Distributors and Commercial Services & Supplies    | 2015 | 239             | 
-| Utilities                                                              | 2013 | 122             | 
-| Utilities                                                              | 2016 | 122             | 
+
+
+
+
+
+
+
+**The outer query then selects all columns from the "base" table where the industry group is in a subquery that filters industry groups based on the count of trends labeled as "decrease" being less than 3**
+
+**In summary, the query aims to identify industry groups where the trend in carbon footprint is predominantly decreasing and the count of such trends is less than 3**
+
+WITH base as
+(
+ SELECT 
+    a.*, 
+    CASE 
+        WHEN a.total_carbon_fp - a.carbon_fp_change > 0 THEN 'increase'
+   		WHEN a.total_carbon_fp - a.carbon_fp_change < 0 THEN 'decrease'
+        ELSE 'stable' 
+    END AS trend   
+ FROM
+  		(SELECT 
+        	ind.industry_group,
+        	p.year,
+        	SUM(p.carbon_footprint_pcf) as total_carbon_fp,
+        	LAG(SUM(p.carbon_footprint_pcf)) OVER (PARTITION BY ind.industry_group ORDER BY p.year) AS carbon_fp_change
+    	FROM 
+        	product_emissions as p
+    	LEFT JOIN 
+       	 	industry_groups as ind ON p.industry_group_id = ind.id
+    	GROUP BY 
+        	ind.industry_group, p.year
+   		ORDER BY 
+        	ind.industry_group, p.year
+   		) a
+)
+
+SELECT * 
+FROM
+	base 
+WHERE industry_group 
+IN
+	(
+	SELECT b.industry_group
+	FROM
+		(
+		SELECT 
+		  	de.industry_group
+		  	,tl.count_trend
+
+		FROM
+ 			(
+			SELECT 
+			 	industry_group
+			 	,trend
+			FROM base 
+			WHERE trend ='decrease'
+			GROUP BY industry_group,trend) de
+
+		LEFT JOIN
+
+			(
+			SELECT 
+			  	a.industry_group
+			  	,count(a.industry_group) as count_trend
+			FROM
+  				(
+				 SELECT
+				 	industry_group
+				 	,trend
+				FROM base 
+				GROUP BY industry_group,trend) a
+			GROUP BY a.industry_group) tl
+		ON e.industry_group = tl.industry_group
+	HAVING count_trend <3) b
+	)
