@@ -100,7 +100,7 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 | Wind Turbine G90 2 Megawats  | Electrical Equipment and Machinery | 1251625         | 
 | TCDE                         | Materials                          | 198150          | 
 
-  **--> Electrical Equipment and Machinery is the industry groups of these products?**
+  **--> Electrical Equipment and Machinery is the industry groups of these products**
 
 ## 3. What are the industries with the highest contribution to carbon emissions?
     SELECT 
@@ -126,7 +126,7 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 | ---------------------------: | ---------------------------------: | --------------: | 
 | Wind Turbine G128 5 Megawats | Electrical Equipment and Machinery | 3718044         | 
 
-  **--> Electrical Equipment and Machinery is he industries with the highest contribution to carbon emissions?**
+  **--> Electrical Equipment and Machinery is he industries with the highest contribution to carbon emissions**
   
 ***In which: In the industry group of Electrical Equipment and Machinery, the product related to Wind Turbine is the main cause of carbon emissions***
 
