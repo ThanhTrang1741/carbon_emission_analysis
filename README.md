@@ -348,9 +348,103 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 | Utilities                                                              | 2016 | 122             | 122              | stable   | 
 
 
-
-
 **Then selects all industry_group from the "base" table where the industry group is in a subquery that filters industry groups based on the count of trends labeled as "decrease". Thanks to that identify industry groups where the trend in carbon footprint is predominantly decreasing**
+     
+     WITH base as
+    (
+ 	SELECT 
+    		a.*, 
+    	CASE 
+        	WHEN a.total_carbon_fp - a.carbon_fp_change > 0 THEN 'increase'
+   		WHEN a.total_carbon_fp - a.carbon_fp_change < 0 THEN 'decrease'
+        	ELSE 'stable' 
+    	END AS trend   
+	FROM
+  		(SELECT 
+        		ind.industry_group
+        		,p.year
+        		,SUM(p.carbon_footprint_pcf) as total_carbon_fp
+        		,LAG(SUM(p.carbon_footprint_pcf)) OVER (PARTITION BY ind.industry_group ORDER BY p.year) AS carbon_fp_change
+    		FROM 
+        		product_emissions as p
+    		LEFT JOIN 
+       	 		industry_groups as ind ON p.industry_group_id = ind.id
+    		GROUP BY 
+        		ind.industry_group, p.year
+   		ORDER BY 
+        		ind.industry_group, p.year
+   		) a
+    )
 
+    SELECT 
+		industry_group
+		,year
+		,total_carbon_fp
+    FROM
+		base 
+    WHERE 
+		industry_group 
+    IN
+	(
+	SELECT 
+	  b.industry_group
+	FROM
+		(
+		SELECT 
+		  	de.industry_group
+		  	,tl.count_trend
+
+		FROM
+ 			(
+			SELECT 
+			 	industry_group
+			 	,trend
+			FROM base 
+			WHERE trend ='decrease'
+			GROUP BY industry_group,trend) de
+
+		LEFT JOIN
+
+			(
+			SELECT 
+			  	a.industry_group
+			  	,count(a.industry_group) as count_trend
+			FROM
+  				(
+				 SELECT
+				 	industry_group
+				 	,trend
+				FROM base 
+				GROUP BY industry_group,trend) a
+			GROUP BY a.industry_group) tl
+		ON de.industry_group = tl.industry_group
+	HAVING count_trend <3) b
+	)
+
+
+| industry_group                           | year | total_carbon_fp | 
+| ---------------------------------------: | ---: | --------------: | 
+| Food & Staples Retailing                 | 2014 | 773             | 
+| Food & Staples Retailing                 | 2015 | 706             | 
+| Food & Staples Retailing                 | 2016 | 2               | 
+| Media                                    | 2013 | 9645            | 
+| Media                                    | 2014 | 9645            | 
+| Media                                    | 2015 | 1919            | 
+| Media                                    | 2016 | 1808            | 
+| Retailing                                | 2014 | 19              | 
+| Retailing                                | 2015 | 11              | 
+| Semiconductors & Semiconductor Equipment | 2014 | 50              | 
+| Semiconductors & Semiconductor Equipment | 2016 | 4               | 
+
+
+![image](https://github.com/user-attachments/assets/9c9f9d06-9317-47b0-958a-c36e46f5934f)
+
+![image](https://github.com/user-attachments/assets/76a553c5-06c6-43d4-baee-41a1e1caccf7)
+
+![image](https://github.com/user-attachments/assets/5321d7c7-e249-4e08-af5d-37e089141565)
+
+
+**The data and charts indicate that the industry groups of Media, Food & Staples Retailing, and Retailing have shown significant decreases in carbon footprints (PCFs) over time.
+However, this does not say whether these industries are trying to reduce the amount of CO2 because I have not analyzed the volume of each product that these industries produce each year**
 
 **BUT I AM LAZYYYY SO MAYBE I WILL ANALYZE THE PROBLEM ABOVE SOMEDAY. OR IF YOU CAN, YOU CAN SHARE THE RESULT HERE]**
