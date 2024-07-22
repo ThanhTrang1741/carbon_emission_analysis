@@ -50,12 +50,17 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ## 1. Which products contribute the most to carbon emissions? 
 
     SELECT 
-            product_name
-            ,sum(carbon_footprint_pcf) as total_carbon_fp
-    FROM product_emissions
-    GROUP BY product_name
-    ORDER BY total_carbon_fp desc
-    LIMIT 5
+        product_name
+        ,sum(carbon_footprint_pcf) as total_carbon_fp
+    FROM 
+    	product_emissions
+    GROUP BY 
+    	product_name
+    ORDER BY 
+    	total_carbon_fp desc
+    LIMIT 
+    	5
+    ;
 
 | product_name                 | total_carbon_fp | 
 | ---------------------------: | --------------: | 
@@ -69,15 +74,21 @@ The dataset consists of 4 tables containing information regarding carbon emissio
     
 ## 2. What are the industry groups of these products?
     SELECT 
-          p.product_name
-          ,ind.industry_group
-          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
-    FROM product_emissions as p
-    LEFT JOIN industry_groups as ind
-    ON p.industry_group_id = ind.id
-    GROUP BY p.product_name, ind.industry_group
-    ORDER BY total_carbon_fp desc
-    LIMIT 5
+        p.product_name
+        ,ind.industry_group
+        ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+    FROM 
+    	product_emissions as p
+    LEFT JOIN 
+    	industry_groups as ind
+    ON 
+    	p.industry_group_id = ind.id
+    GROUP BY 
+    	p.product_name, ind.industry_group
+    ORDER BY 
+    	total_carbon_fp desc
+    LIMIT 
+    	5
     ;
 
 
@@ -93,15 +104,21 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 
 ## 3. What are the industries with the highest contribution to carbon emissions?
     SELECT 
-          p.product_name
-          ,ind.industry_group
-          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
-    FROM product_emissions as p
-    LEFT JOIN industry_groups as ind
-    ON p.industry_group_id = ind.id
-    GROUP BY p.product_name,ind.industry_group
-    ORDER BY total_carbon_fp desc
-    LIMIT 1
+        p.product_name
+        ,ind.industry_group
+        ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+    FROM 
+    	product_emissions as p
+    LEFT JOIN 
+    	industry_groups as ind
+    ON 	
+    	p.industry_group_id = ind.id
+    GROUP BY 
+    	p.product_name,ind.industry_group
+    ORDER BY 	
+    	total_carbon_fp desc
+    LIMIT 
+    	1
     ;
 
 
@@ -114,15 +131,21 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ***In which: In the industry group of Electrical Equipment and Machinery, the product related to Wind Turbine is the main cause of carbon emissions***
 
     SELECT 
-          p.product_name
-          ,ind.industry_group
-          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
-    FROM product_emissions as p
-    LEFT JOIN industry_groups as ind
-    ON p.industry_group_id = ind.id
-    WHERE ind.industry_group ='Electrical Equipment and Machinery'
-    GROUP BY p.product_name,ind.industry_group
-    ORDER BY total_carbon_fp desc
+        p.product_name
+        ,ind.industry_group
+        ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+    FROM 
+    	product_emissions as p
+    LEFT JOIN 
+    	industry_groups as ind
+    ON 
+    	p.industry_group_id = ind.id
+    WHERE 
+    	ind.industry_group ='Electrical Equipment and Machinery'
+    GROUP BY 
+    	p.product_name,ind.industry_group
+    ORDER BY 
+    	total_carbon_fp desc
     ;
 
 
@@ -143,15 +166,22 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ## 4. What are the companies with the highest contribution to carbon emissions?
 
     SELECT 
-          p.product_name
-          ,com.company_name
-          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
-    FROM product_emissions as p
-    LEFT JOIN companies as com
-    ON p.company_id = com.id
-    GROUP BY p.product_name,com.company_name
-    ORDER BY total_carbon_fp desc
-    LIMIT 1;
+        p.product_name
+        ,com.company_name
+        ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+    FROM 
+    	product_emissions as p
+    LEFT JOIN 
+    	companies as com
+    ON 
+    	p.company_id = com.id
+    GROUP BY 
+    	p.product_name,com.company_name
+    ORDER BY 
+    	total_carbon_fp desc
+    LIMIT 
+    	1
+    ;
 
 
 | product_name                 | company_name                           | total_carbon_fp | 
@@ -163,14 +193,20 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ## 5. What are the countries with the highest contribution to carbon emissions?
 
     SELECT 
-          country.country_name
-          ,sum(p.carbon_footprint_pcf) as total_carbon_fp
-    FROM product_emissions as p
-    LEFT JOIN countries as country
-    ON p.country_id = country.id
-    GROUP BY country.country_name
-    ORDER BY total_carbon_fp desc
-    LIMIT 5
+        country.country_name
+        ,sum(p.carbon_footprint_pcf) as total_carbon_fp
+    FROM 
+    	product_emissions as p
+    LEFT JOIN 
+    	countries as country
+    ON 
+    	p.country_id = country.id
+    GROUP BY 
+    	country.country_name
+    ORDER BY 
+    	total_carbon_fp desc
+    LIMIT 
+    	5
     ;
 
 | country_name | total_carbon_fp | 
@@ -186,14 +222,14 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ## 6. What is the trend of carbon footprints (PCFs) over the years?
 
     SELECT
-          year
-          ,sum(carbon_footprint_pcf) as total_carbon_fp
+        year
+	,sum(carbon_footprint_pcf) as total_carbon_fp
     FROM 
-      product_emissions
+      	product_emissions
     GROUP BY 
-      year
+      	year
     ORDER BY 
-      year asc
+     	year asc
     ;
 
 
@@ -315,4 +351,6 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 
 
 **Then selects all industry_group from the "base" table where the industry group is in a subquery that filters industry groups based on the count of trends labeled as "decrease". Thanks to that identify industry groups where the trend in carbon footprint is predominantly decreasing**
+
+
 **BUT I AM LAZYYYY SO MAYBE I WILL ANALYZE THE PROBLEM ABOVE SOMEDAY. OR IF YOU CAN, YOU CAN SHARE THE RESULT HERE]**
