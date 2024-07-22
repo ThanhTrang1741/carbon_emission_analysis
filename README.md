@@ -389,3 +389,7 @@ country_name: The name of the country.
 | Semiconductors & Semiconductor Equipment | 2014 | 50              | [NULL]           | stable   | 
 | Semiconductors & Semiconductor Equipment | 2016 | 4               | 50               | decrease | 
 
+
+![image](https://github.com/user-attachments/assets/00d993f7-768a-4ce0-8f06-3a92dacf1f47)   ![image](https://github.com/user-attachments/assets/90fc8779-9201-42a4-928a-70039d60131e)  ![image](https://github.com/user-attachments/assets/7ab33bf9-ab5e-443a-98bd-fb32332f9cf3)
+
+
