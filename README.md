@@ -447,4 +447,4 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 **-->The data and charts indicate that the industry groups of Media, Food & Staples Retailing, and Retailing have shown significant decreases in carbon footprints (PCFs) over time.
 However, this does not say whether these industries are trying to reduce the amount of CO2 because I have not analyzed the volume of each product that these industries produce each year**
 
-**BUT I AM LAZYYYY SO MAYBE I WILL ANALYZE THE PROBLEM ABOVE SOMEDAY. OR IF YOU CAN, YOU CAN SHARE THE RESULT HERE]**
+**BUT I AM LAZYYYY SO MAYBE I WILL ANALYZE THE PROBLEM ABOVE SOMEDAY. OR IF YOU CAN, YOU CAN SHARE THE RESULT HERE =]]**
