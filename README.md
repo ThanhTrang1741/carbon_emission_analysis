@@ -15,7 +15,7 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 
 **Tables' columns description**
 
-    **Table 'product_emissions'**
+**Table 'product_emissions'**
 
 	id:				Identifier for each product emission record.
 	company_id: 			Identifier for the company associated with the product.
@@ -30,17 +30,20 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 	downstream_percent_total_pcf: 	The percentage of the total carbon footprint attributed to downstream activities.
  
 
-    **Table 'industry_groups'**
+**Table 'industry_groups'**
+
 	id: 				Unique identifier for each industry group.
 	industry_group: 		The name of the industry group, categorizing businesses within similar sectors based on their products or services offered.
  
 
-    **Table 'companies'**
+**Table 'companies'**
+
 	id: 				Unique identifier for each company.
 	company_name: 			The name of the company, identifying the specific organization within the dataset.
  
 
-    **Table 'countries'**
+**Table 'countries'**
+
 	id: 				Unique identifier for each country.
 	country_name: 			The name of the country.
 
@@ -312,6 +315,4 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 
 
 **Then selects all industry_group from the "base" table where the industry group is in a subquery that filters industry groups based on the count of trends labeled as "decrease". Thanks to that identify industry groups where the trend in carbon footprint is predominantly decreasing**
-
-    WITH base as
-   IT, YOU CAN SHARE THE RESULT HERE =]]]**
+**BUT I AM LAZYYYY SO MAYBE I WILL ANALYZE THE PROBLEM ABOVE SOMEDAY. OR IF YOU CAN, YOU CAN SHARE THE RESULT HERE]**
