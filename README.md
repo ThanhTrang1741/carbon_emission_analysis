@@ -244,7 +244,7 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ![image](https://github.com/user-attachments/assets/844ed99d-2167-4ca4-bbc1-668f5381b9ab)
 
 
-**The total_carbon_fp seem to vary significantly from year to year, with a notable increase in 2015 - 10840415 pcf compared to the other years**
+**-->The total_carbon_fp seem to vary significantly from year to year, with a notable increase in 2015 - 10840415 pcf compared to the other years**
 
 ## 7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 
@@ -444,7 +444,7 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ![image](https://github.com/user-attachments/assets/5321d7c7-e249-4e08-af5d-37e089141565)
 
 
-**The data and charts indicate that the industry groups of Media, Food & Staples Retailing, and Retailing have shown significant decreases in carbon footprints (PCFs) over time.
+**-->The data and charts indicate that the industry groups of Media, Food & Staples Retailing, and Retailing have shown significant decreases in carbon footprints (PCFs) over time.
 However, this does not say whether these industries are trying to reduce the amount of CO2 because I have not analyzed the volume of each product that these industries produce each year**
 
 **BUT I AM LAZYYYY SO MAYBE I WILL ANALYZE THE PROBLEM ABOVE SOMEDAY. OR IF YOU CAN, YOU CAN SHARE THE RESULT HERE]**
